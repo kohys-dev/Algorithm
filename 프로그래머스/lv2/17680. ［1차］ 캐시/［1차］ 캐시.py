@@ -7,7 +7,7 @@ def solution(cacheSize, cities):
     
     hit = 0
     miss = 0
-    cache = deque()
+    cache = deque(maxlen=cacheSize)
     
     for item in cities:
         item = item.lower()
@@ -17,11 +17,7 @@ def solution(cacheSize, cities):
             cache.appendleft(item)
         else:
             miss += 1
-            if len(cache) < cacheSize:
-                cache.appendleft(item)
-            else:
-                cache.pop()
-                cache.appendleft(item)
+            cache.appendleft(item)
 
     answer = hit * 1 + miss * 5
     return answer

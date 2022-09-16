@@ -14,19 +14,11 @@ def solution(m, musicinfos):
         s = datetime.strptime(temp[0], '%H:%M')
         e = datetime.strptime(temp[1], '%H:%M')
         pt = int(((e-s).seconds)/60)
-        if pt > len(temp[3]):
-            if pt%len(temp[3]) != 0:
-                cnt = pt//len(temp[3]) + 1
-            else:
-                cnt = pt//len(temp[3])
-            notes = temp[3] * cnt
-        elif pt < len(temp[3]):
-            notes = temp[3][:pt+1]
-        else:
-            notes = temp[3]
-            
+        
+        notes = (pt//len(temp[3])*temp[3]) + (temp[3][:pt%len(temp[3])+1])
         if m in notes:
             answer.append([temp[2], pt, i])
+            
     if not answer:
         return '(None)'
     elif len(answer) > 1:
